@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>푸드파이터</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="../static/firebase2.js" type="module"></script>
+    <style>
+        /* 구글 폰트 import url 넣어주세요. */
+        /* 구글 폰트 CSS rules를 전체 적용해 주세요. */
+
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+        * {
+            font-family: "Gowun Dodum", sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: black;
+        }
+
+        .header {
+            background-size: cover;
+            background-image:
+                url('https://images.unsplash.com/photo-1531697218799-ed0ae884c6c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');
+            background-position: right;
+            height: 650px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header>h1 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        .header>div {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .form-button {
+            width: 150px;
+            height: 40px;
+            background-color: transparent;
+            border: 1px solid tr;
+            color: black;
+            font-size: 15px;
+            margin: 20px 10px 0px 0px;
+        }
+
+        .form-button:hover {
+            border: 2px solid black;
+        }
+
+        .info-button {
+            margin: 20px 0 0 15px;
+            height: 40px;
+            font-size: 14px;
+        }
+
+        .post {
+            width: 500px;
+            margin: 20px 0px 1px 20px;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px transparent;
+            background-color: wheat;
+        }
+
+        .form-floating input,
+        .form-floating textarea {
+            color: black;
+            background-color: white;
+        }
+
+        .button2 {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+
+        .button2>button {
+            margin-right: 10px;
+        }
+
+        .mycards {
+            width: 1600px;
+            margin: 30px auto;
+
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .card {
+            border-radius: 30px;
+            background-color: white;
+            border: none;
+            color: black;
+            margin-left: 50px;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            height: 250px;
+            border-radius: 20px;
+        }
+
+        .card-title {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .card-body {
+            border: blanchedalmond 2px solid;
+            border-radius: 20px;
+        }
+
+        .card-text {
+            color: black;
+        }
+
+        .comment {
+            color: black;
+        }
+
+        .play-button {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 15px;
+        }
+
+        a.nav-link {
+            color: #F17228;
+            font-size: large;
+        }
+
+        .icon {
+            height: 50px;
+        }
+
+        .card-button {
+            background-color: orange;
+            color: white;
+            text-align: center;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        .card-button> :hover {
+            background-color: darkorange;
+        }
+
+        #input-card {
+            width: 500px;
+            margin: 0px 100px 0px 0px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            float: left;
+        }
+
+        .form-floating input,
+        .form-floating textarea {
+            color: black;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .form-floating label {
+            color: #333;
+        }
+
+        .input-group button,
+        .input-group select {
+            background-color: rgb(168, 161, 161);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .input-group button:hover,
+        .input-group select:hover {
+            background-color: gray;
+        }
+
+        .button2 {
+            text-align: right;
+        }
+
+        .button2 button {
+            background-color: #F17228;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button2 button:hover {
+            background-color: #f3620f;
+        }
+
+        .jumbotron-message {
+            margin-left: 150px;
+            font-size: 1500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="p-3 text-bg-dark">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <img src="https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/food.png"
+                        class="icon"></li>
+                    <li><a href="#" class="nav-link px-2 text-danger">Foodcourt</a></li>
+                    <li><a href="#" class="nav-link px-2 ">홈</a></li>
+                    <li><a href="#" class="nav-link px-2 ">한식</a></li>
+                    <li><a href="#" class="nav-link px-2 ">일식</a></li>
+                    <li><a href="#" class="nav-link px-2 ">중식</a></li>
+                    <li><a href="#" class="nav-link px-2 ">양식</a></li>
+                </ul>
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
+                        aria-label="Search">
+                </form>
+                <div class="text-end">
+                    <button type="button" class="btn btn-warning me-2">Login</button>
+                    <button type="button" class="btn btn-warning">Sign-up</button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </header>
+    <div class="header">
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">스파르타 푸드파이터</h1>
+                <p class="col-md-8 fs-4">본인만의 맛집을 소개하는 사이트입니다</p>
+                <p class="col-md-8 fs-4">맛집을 소개해 주세요</p>
+
+                <div class="post" id="input-card">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">음식 이미지 주소</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="foodTitle" placeholder="영화 제목">
+                        <label for="foodTitle">음식명</label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <button class="btn btn-outline-secondary" type="button">별점</button>
+                        <select class="form-select" id="inputGroupSelect03"
+                            aria-label="Example select with button addon">
+                            <option selected>별점 선택</option>
+                            <option value="1">⭐</option>
+                            <option value="2">⭐⭐</option>
+                            <option value="3">⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                            <option value="5">⭐⭐⭐⭐⭐</option>
+                        </select>
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here"
+                            id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">추천 이유</label>
+                    </div>
+                    <div class="button2">
+                        <button type="button" class="btn btn-danger" id="addBtn"> 기록하기 </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- 점보 트론 적용 jumbotron -->
+    <!-- - https://getbootstrap.com/
+    - Bootstrap 사이트에서 jumbotron가져와 vscode에 붙여 넣어주세요.
+    - 배경 이미지 적용을 위해 <div class="header"> 로 감싸주세요.
+    - jumbotron의 내용을 예시사진과 똑같게 내용을 변경해 주세요.
+        - 필요 없는 버튼, div를 적절하게 삭제
+    - jumbotron <h1> 태그안에 `Blank Han Sans` 폰트 스타일을 적용해 주세요. -->
+
+    <!-- 부트스트랩 인풋 박스 적용-->
+
+
+
+    <!-- 부트스트랩 카드 적용-->
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbkSPPRcBVlTwCAFyw4W3qJjmFu4C5Fmlv_A&s"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">콤비네이션 피자</h5>
+                        <p class="card-text">⭐⭐⭐⭐⭐</p>
+                        <button type="button" class="btn btn-warning">주문하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQTEhUTEhMWFhMXGCAbGBgXGBsYHRoXHRsfIBofHxgYHighHRonGxoeIjEhJikuMC4uGiAzODMvNygtLisBCgoKDg0OGxAQGjclICUwLSs1MDA1NS0vOC04Ky0vLTUtLS01Ny0tLTIvNS0tLS0vLTAtNTctLy81Ly8tLS0tLf/AABEIALkBEAMBIgACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABQYDBAcIAgH/xABGEAABAwIEAwUECAUDAwEJAAABAgMRACEEBRIxQVFhBhMicYEykaGxBxQjQlJiwfBygpLR4TNT8UOjsnMkJTVEY4OiwtL/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAgMEAQUG/8QALhEAAgIBAwEGBQUBAQAAAAAAAAECEQMSITFBBBMiUWHwMoGRobFxwdHh8UIF/9oADAMBAAIRAxEAPwDuNKUoBSlKAUpSgFKUoBSlKAUpULje0aEkoZHerBgwYQkjcKXtq/KJPOKCiarQxObsoOnXqV+FAKyPMJnT6xVQzbPEgE4rECP9tJ0o/pHiWP4iR0FU7NPpOQhOhhsJHut0AiB5TUXJImoM6ovO1kwhggc3FpT8Eav0rXxGbuj2nGUjok29Sq9ulcDzf6QMU7P2ikjkmEj+/wAKgXc4cUCS5v1k++o6n0R2o+Z6OX2hSN8akHl9l/ag7Roi2MT/ANo/ICvOWEQtxWnXpVwKh+p4V95tgsRhzDosDE2IH9vlUe9V6epsl2LIsfeteHz2+/VfQ9JIz5ceFxpXmn9Urt7q3GM7c++xI5trCj/SoJjyk15jwjr4EpS7HMJXHodqkMH2zxTCgkOrMcF3/wDITXVkt0Y6j5npfD5yysxr0q20rBQZ5DVE+k1IVwjLPpJ1eB9sGd4A/wDE7+dXPI+0SVx9Weif+mvxJH8pMgfwkbVNSTOOB0SlROEztJgOgNk2BmUHl4uB6GL2E1LVIgKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAK18wxzbDanXlhDad1H4eZJsALmsWb5o3hmlPPK0oT6kngAOKibAVxztL2iViD9YxRKGkk9yyDMHgY+84eJ4AkbVxuiUY2WLOO2CsRN+5w3AFULcE3KyLhP5B6zMCi5x2xMFvD+FsbEDSfMQbfLnUJjMzdxHigEEwhptOoyOg3V/zwrZy/sW44O8xbgYamzafG4o8oFgeW/kKz5M0Y8uvfQk2kVvF49bi4GpSibASok/Mny99SGA7JYlw+JPdDc6vajmU8P5iDV6wGEZYEMthgbFR8by/wCJZsmfwp+FbD+OQ2PGoNJ5E+Ik9D4r8yPQ1gydu6QX7v39SiWW+CGyvshh2hqX41DiraeiePz6GtvF5IhwrPdhOpJSkqQNW0SALjhuJtWviO0oP2eGQe8NhaVe9V46Qn0phcI4kh198JXwAUSsHbe8SDwSax5MmVu5Mrt3ZW2cEooAcSUOcAbEKjrwqZyLM9SF4Z32xdIMQojYEKB3iARBEelbOKwapStAhAnUXgG0ruFJAUsypUyRMCOVRGOw4edSW29KiYSNQ3m6SowARFv1tVzTmqa25/Rn3/Y+2LtfZ4ykt+H5be7+xIF5GHUUqZWXFAqS8pWoIAuSlC0lCSOWk72r4xmHTiS0pP2gVtHiWok+JRUqAR6ACsebPL+rNl1IdZX7KxcpIMKQoEbx8/M1cuxGBLilrjwkQfyykaEJnaEmTHFRqnJqx1Lr7+nvzPmP/V7FHDm0wez+2+/v5dDl+a9n4JDchY/6a4GqDfSoEgkcprWwHeJAUCRF5BIUOVdHz7KEkhjD6lFKyJMTZI1A3EgKiY4VWcJ2SxEkoWtSpI/0wBPmVk+Vq24O1OcPEzFihJPayZ7OfSAoDunzrT+LZUdQdxzsa6JkOelCAppXesf7cjUkfkUTa33DbaNN64Jj8new6pdbISDuJ987g9amMpzF3DnvGVSk+0k7EcegPUW8jc+hHJ62XPG+qPS2BxqHkBxtWpJ9CDxBBuCOINxWxXKuzvaIrPf4Y+OwcZJgLAsQbWVwCtwbG0iuk5TmSMQ2HGyY2INlJUN0qHBQ/wAiQQauTszyjRuUpSukRSlKAUpSgFKUoBSlKAUpSgFKUoBWPEPpbQpa1BKEglSjYAASSekVkrmP0m9oC44MC0fCmFPkcVboRPIWUf5eRFRk6RKMdTogO1HaT604X3SUYdue4QQfLUeHeK67C3MnnWZY/v1lSiOSRNkp6TueZqQzbGh51LKVQyj2iJvG5HM8v8VM4JKkeJhQQkGIUBMjfaDFZMubR6m/D2Z5PQh+zL2KwsuNoAaXCVKKdRABklCJBJAP/MRVkfzJZktIWtR/6i7EjoTCUjoIjlU+7mCSw4haG+8KbmJF7A3EgSfK/Cub4HKYcSrEF0OBaY7uFJSkqAC+Mje20edZMyjk3+xm7R2WUdyXdeejUpQQPyG/UFcaQP4SKYDI3XroaJTxWZSI6rV4iPKRVvw+Aw4WQ02t95JupxSVqHKGkmEnoYqad7PLUnXi3u5bHArA9NAA0/1+lZIrJK1BfsY9JTWsvw2HADrpUf8AbYhInkVDf0rfwjrv/wArgUtj8awdR9VSr1ipKGkyMCytwxBdA0+cuAJAPnaq5nCmUT9cfk/7SHFOqPSSSkegVRc1+Ov7jSz7zbBqdhOMxTYVultKwVA7SEpCr3P3ah80ydLCA406UhJ1KDgI1RtCSZmQNwnY1YcJl7pwy3MK01hWwklMp1LXa0q4XqqYfKlOo14lS1OGZESBygzHwmrIOS3ul67tnpdkw9phJaHS5r+SX7MMtPNu964lGnUbJnUSbJEXvqFr1u5Nn7zJU022tyIgyEgp+7OqADaDe8CoHL8lcQoFgEDjrFulzsb/ALtU9gcGhtJViF6lq8gLDqedRlijNut19D3O2rH2jGu8dSVUudutP19fIhcBmS8XiQ6o6QlLvgSDpClJUJUpP3ioyB5eddCwnaBHdI7wFtWkah3SyNQF76Taf+K1eyLzS5bbZShxN4jcSYKQYt76tCMMv7yJH5T+n6VvjFpVFJJHkRhCC07kYrDsYptQQpLgHtAQoDhcC6fWuXdo8nOCd8P+iv2fyq4ius43I0qUFo+yeHsuJlK0/wD9A8RcHiKgO0KA82vD4lIS5p1JUmyVEC5A+6q06doEjiBLVW7Gm+DnLGKUwtL7RiNxzHIjlw+HIp6L2d7RaVDEsiQYD7X4hFiB+McDxkjjI5L9YUFd2SIFid5H/Fb3Z/NFYd2AZTyncb/CtEZU6ZnlG90eocLiEuIS4hQUhQBSRxB2rLXN+wGfBt76soyw8SphXAOXKk9AqCQOc8VV0ir07M0lTFKUrpEUpSgFKUoBSlKAUpSgFKUoCK7UZwMJhXXyASkeBJ+8s2QPIqIk8BJ4V57zjHKQha1KJcWTKuJUZ1nzJJron0uZprfZwqTZsd6u8DUqQi/RIUY/OK41nmN1OgfdQR6wb/vpVEvFKi+HhjfmW3srl8J0zpWU6lqN9KRv+/8AJqefwTTOoQFhafESRqmx1cxabcevGvdntJb1r++TpPRAtvaNR+VxUZmWbAu60jQDII+dYIrxO+T2lSiqexM4vGtytNyidz4QU8ItPr051ouYpTy9WkqQAoAiBcx12qOYw6n0ulPhQ2jVPAmRCb3g3uKmOz2cIWAlIEgDwxsPLa21ReJvfr+Dvexe3T8kz2dz5/CsFphLKFqUSXCjUtQJtMG8dSbVtvZ/ighBVhm3HYOrEOBS780tqsB5ECosJc7tbyBqvzA8IB1frUlgs2StADhW24oWBTv1AX7VuXLjUZwm15mafZ8Er2o/HBicSkF95xUpCkoSdCQk/eIF0oPCTJjY1VmShOJQhlrvTNjEJUvhxukcdyfdVhWhQbW2l9tLbh1FJAQSrYwCr2TaQPhJqJy3GYppSpQFKEkNjZGpQUCFDYE2iwN6hHE1d/Tgz4uz6cmpvZcF/wA+xWppvvAhPhlQJ3VHCRt+/Ouh9R0thoAm0CJnfjPDl8KsOEfbS2heM7t5w2lLYB1fhSmJNuO50kmALZMHkhdV3mgYdB4IstU8VORM32G3M1XBd5LZ2eisqhGqo2cFkbaAlWKcSkx7ClBI+N9v1qw4JjDlMNaFJ/KpJHzt+sVr4LB4dvZEKO5gkq8ybn38TWdeX4Z86SElXEFN/coSPOK9LHjUY1FI8/JNydybMuLyNp2NSASL9QfmDUcvBO4dae5cKkzdt0lQA4kLuoHoZG1hvXxm2BXhGy404otjdClbD8q1GUnoZT0rDhu0eHKNSVhOq51gzPXe9udck4J77P39RFTcdvEiRxBcWSkrgWskW/q390Vq4vI23AderUd5ne0X6b1nweKS8CUPpVz0mY6QNvWpBMAe1Pn/AIqxRjLd7lblKOy2Of5v2PYb1KXhwrwkakgCOp2HDfqYiua9qcmS04UNG6UhfkTcpB4jkf8AmvQmIa8JkyPfXI+12AQp5Xd2cCfEki0RCYne1vIDiKpyS7vdM0YEsr0yIrs3j+9aKNULRC0HilSTNjzBAIrvfZbOBisM29YLI0uAcHE2UPKbjoRXmHJ3i0+AdiY9wPzFdi+i3NNOIcZJ8D41o2jvEbxG5Ui/k2K2RluYckdn5o6lSlKuM4pSlAKUpQClKUApSlAKUqM7T4ws4PEOj2kNLKf4tJ0/GKA4J2lzYvP4nETIUtSkx+EeFv8A/BKbVSsFhu9V4tiY9T+5qYzdehmBxgegHyrHhWvZCbaQbcZ35+1asmppX5m+GPVKuiNwYB7uwie7aRKQtU+JRUdWkASqVCPIDrX1h8jCHUJfcSWzCwqJCkkSkwOszepXAYtLqYWidIiQZEHUQLWFifebSaZ9hktlC0eAJteUiI6C48qwrLPVpaq7/rfz90eg8UatM0+0GrWWkFIMSAmEgJ2OqbX4X4RyqHYyxQA8AK7kKMFMSQYAny/UVMZM5h+8SvUQrV4kgwmNhpVAhNxa0QIraxy/ElxDZUEgawBBEgFQAmBaxHCrFKWNaPuQUFker7Gjgs3cK/q7rmlC1EEhAEBR8VyTv+g2qWOYuBSsHiFd7ou04TCtIkjxD7995H99DCMB9XgBOrgNwQNiKx5uo4cwVEKIN1zIiJAO/ER68zVMpOckq/330LO7UVd/4buaOtoSlLet15RB8SyuAARME3899qzYHL8Qynv3CVITcokJBJtKVWBVFgD5WNanY3N0hhRUNTusgDQCpQ3Hi3IvG9oPrYcJg3nVhx9xDCfujw+HhYKEA73ib+lV5NUZOD/m/wCCcFGcVJPY2+z+GeWvvUtBPBBdvpR/ADuTcknluAKtpyp1z2sYuDsEBKI6bE/Go1rLEOAJRj1FXCFpHwSL1ixOW45kTqD6OKVAH53nrNWwqEap16f0Vz8b2kk/X+zYxnZzEtytjEKXF9DhC5jhJ2rWynOH1lTamftUmBJOlJ2teU8LA3r9wHapKPD45+8hRJg/lJk+QJty41Hu5goky6jDpUSYmFqk8STNRzZVCu7lz05+h2GOcrWSPz/zktLjUkOYh1KlJFtR0hPkOFrbVuYbDtquhKVD8oB+M1RmsBhF3XiJPMq/xW+x2baN2HyDuClc/KmPK+dF/NWcnhilWuvlsWfE5O0q5RCh7Kh4VDyNj7jxqOdxS2CO+8bc+FydOn+MDY/m25gb1qM5xisIQMT9sxtq+90k8bc/fU8MS1iGpbIUhQg9LbEfpWiM4z+DZ+RmcJw+LdeZqKzVCVRdKVcDsCeUcOY4TVG7TKP1lU6QCgXmZgmf094qYwbR+0ZVuhXgm/hjw+nDyrXz/sr36mlklCtBSSDIJF07yZEK2tTNDvIk8bWOdnKc9bKXiodFDzG/yq3ZFmIaUxiEn/SWlShyTsqL8WyoetQ3arJ3mFJDgkAEBfOYr4yCC0QTeNMRMxIJmbH2atxN92vT9ijNFLI/JnqMGlQ/ZDFl3BYZZMqLSQo/mAhXxBqYrenZ5rVClKUApSlAKUpQClKUAqqfSi8U5a/G5KE+91M/CatdU36Wv/hy/wD1G/8AzFRn8LJQ+JHAM9QVBKUySTAA4m1frBsUQUrHAnSeo5it1mO/QqY0AkeZEAj1EVr4zAhxVp1cVXO/Pmf3xrDKW6i+D1MUJU5R54JrC5kjDag2EqFpmVd5IMACALcTNtt5rT7XOpebS4lKg4TERKUo6H3e+o3D4N9lQKDZUg6gAkpNjvtbjUj9Z+tMhA1IWPahJgyoAeODpTAEzyNQUIxaknfqTk3JaWqZ9ZNlToW0tZCUxIUkAE9QAN0gG/5hFSeXMMh6QlcJt4FeGb7iLi235a3crwpwoha9YJOg8SkgEgDhcH3k1E/V3SpS0JhJNvFBneLHjx4wJFV5Z6tk+hZhgo22WHFZcwVlSCSfZ1IlBnmRBne81D5lkLi3O6V9qBdJXEoGxkCLm8C208q2mscW0+NJ8aCR4irSbQZm6gYselaPZHDYhQV9sNKzKiYKjO995P8AxWXFBpuV/v8ATyLpvhVf4JvKOziB4e/Mj7rdvfpuPMmp9ORsIupKVH8yiSfU2+NaDWQJA8Lq+tx8RyrawrDqbNKSoRB4z5zXG0t5QbXvoTbcuJ/sbGJy7DPgJbIQscIj/nzFfIzp/AkIehxo7SbwN4Ud/X31B47MlMpXrQUKJkGJAJ38JMXibcfM1pIzDDWcWpWIcgRrkm4sINhU0o3rxbefkRUZVpybrp1+jNjPs4GIeK2W1hMQVJAKjHLgmtRoMJ/1MM7fdSjPztUknN3jAThggc/8EV9t9oFBRS6m3Ij37/qONQ0xlJvUrLVKUYpadv1N3DMYFwAJAB9x/wA19ns4B4sO6QocDv796j8bl7Lp+yV3ayJA2BvG3nxHMc6jmMxewrgQ9JSTZU7CeBNinofhVqxx4kqfoVOUuYO/RlnwWdQTh8aAlUWWR4VDrwHn+zqYlleBeD7RJw5/1UgzCfxDymfhxqTzXK04puCQFpvz9RzSf8VWcsfdZcOCfkoWCEHkeh5Ee4+dT0OMkpc9GQi1KLcfmv4JvPmS48hTLmhZTdQAPhm2oERpnY7ztWJ1zMkp7kqQ5tpcICVJI5wIPpFRvZzI1pcWEuqS61EBdwpEWHMCQRba0zVrwfaJsLDDyS25MJ1eysflV06wa0qmqujI01wrI7GNJxmHWFIAULKTuUKjafiOkenLMoYU2462baVEQR5QZtFj8q61jsQGMUhUHQ8NCx+cSUH5j1Fc2xz4XjXyNp+MJpF7/khOO19Oh2f6KnJy5sfhW4P+4pQ+Cqt1Uv6Jj/7CbR9su3uq6Vux/Cjzp/ExSlKmRFKUoBSlKAUpSgFVH6VmycseI3Sps/8AdQD8DVuqG7ZYQu4HEoAlRZWUj8wTKfiBXJK00di6aZ5rxpIdbVIEA7mJIgxf4elSeQOgupnYmCOYjfoagcY/KwIsBb9b+QqZ7OJlSjuQLDnXn5vhR7HZepeH8KhV5PSf3eoXMYZKICftFjUCJCiDInSQdNpI4xFSDGIGr7Y6RAsASY5R90VFdpw24W0MKvqJJF4AESR/MKxwhJStKkadS+G7NbtTmDrzgW1LZR4YTMpI4gjgflUHg8Y+kEFX8xi458iJ67i1SCy4dWiO/R4SIJS4Dt4RuraDHGtQMvrs+6WtvDATA4SImOp51sjFOO5mm3GdI/VALbHeKJAVqJM+Kd7gR6datGTZZh9AUy6tJ48DHW8xUO12XXIWslY4KKpEdKm8JhmbJlTavuqIOknzO1Ys+S/DH7bG3FGlqf8AJLvNOJQSrS4hQIChvtvIuFVssqVCCAFLsCZgm4kyYP6/GNTDqU2DcmPaTMhV+R+8b/CsmblDaR3ahqXs0kST/Lun199cxZJRjadr15RycFKVPZ/YzdpZfH1dIBAAKnVR4QeAg/E1p4LCNMKSlsJUsnxLULg9ExvNqi2ctxGvU4ooOmNyVFJ2BvFjsTWyMlSfEHnSdydyDzI8+NW2m9Wlv39yFUtOqicxmNShH2yioHaI1Dqm1/I28qr7z6DZV21WkiJMb9CAPlWF1p5B1pUHUjzJKffPuNSGBxKXRqZlJSRrTvE7EcCPO+9WxlDJ4ZIreOePxRexHK1M6F6ipoHYcJBBBExx2PHzqwFpGKYidQIlKuIPrxH72vHHESrxhOlYg2ICucybK3sffWjkDysPjFYdMlKiQNzwkHzio6HF6HumSc1Ja1s0bXZjO1tr7h7dBIBNvCN0noIBnkKmu1eH1tlQGl1ohaD1Tf8ASoXtthgnRiG4k+0Bz9PdVlVmKXMOHFCElE35ETUo24uMuUQyNKSnHqVFHaVxLiHloWErSlJWDbc6pEfHpsaumd5cjF4eQBcSlQ4HgQageyr+HxLBw8A6ZgEabTYxy+VZ8kxC8I79UcJ7tcllR4KAPh+A9fOpV/zLhkH5x2a/BC5tnBVh0h4w8w8gKP4gCDr6Ske8Gqlk7xcU87EalEgcpiB6CB6VI/SgmHhFguNXWJj51HZKNOHk/eJPpUsa8Dk+SjNK5pLjk7n9Eqf/AHchX4nXT7nFJ/8A1q5VX+wGFLeXYRJEKLSVKHJS/Gr4qNWCvQiqSR50nbbFKUrpEUpSgFKUoBSlKAV+EV+0oDyr2pyosPPMQQWVqCZ/Ck+E+qIPrWLI8XohzUlMGFSQPO08vnXRPpoyUoxaMQkeF9EKtbvWxFzzU3pH/wBs1ybG4TQbgkEeEjqOPUbelZpY1Lws1wyuHiXUs+d9qEPKATqMWFz4j6W/e9a+TtNrJuW3JuIkgfqnpUPlQlQUR0BHA8D6f3qYfc0qQUwNaBJF5IJInqCRVORpeFGrBGTqbJfLnYdJUPtEHhsoAgiTuUkweG9SKkJccW64qFHUbCQOQjcpn98aryHT4V7EWnpw/t6UxGbwsH4Vj1TbqJ6KhGrZfsmwS0EAoggkrQDAg/GDuB06X/c/wCQ0taEyI9kn2Tvb+xqY7NZqjEtgrKQvgJE9L2v/AHqsdss3Tdphago3NiPDxBJEcRV89Mo6kZMUpKelmjk+YoUFJdVpCfZUeAkwOZHxrYybN0oK1pYU88VHxfdjhBItbgeVQ2VIw7d1oW6r8IgJnqZk+6pw5yoCPq5CeAEp+SaxuULvj35G5wlVVf2P1WPxcqW60VpPUApAk20+fXavnEZ3cFlGlQ/GCSDx9ne3A1jZzgJPtKSOKVjUn0I8QPpWPGYpGIR+BUwFm0RwJ4g86vUp/FF2ilwj8Mo0frLroUop5yURpHDUdJ43ngfmPh7BrMqaBQ9vAgT67E9KyYklKElxQT93URr028JVfxA8+HPcV8OIcBSRZciFFRKFeRJsY/cVd4cyvqU+LC/Q2cFiFPAiEhYMKGooB/CSm8Xm/wAKiMU+UY5lU3JRJ87cOlfuPf046UnSHBBM/iTfb81/MVB5vjh9ZBQJSgjSknfTsPWK5G5JJ8nZVFtrho6H20Qj6us+yfa9Rsaq/ZzFYhQSl4yyIAQIECIEjjbhW5mj6seyNKVJCDKwq0q4JMcLz7q1OzuqQhKRqTMiI+Q5W99WKtTT5KKbgn0ROZ7kJa04vCmFJvbj/fy4ivzPMyS/gUYlIAWghUfhWgiRP9+BqzYJSVsKSBAgwN4PEeipNc0zLEhjD4tqbd8NP8wvw6CqpRqWldSyM7jcun4I7txjA7iVAbISB6kwK3GMB3hZwiZlxSG7bjWRqPTSkk/y1BZKx3iypd761n/xHvn3Cul/RRl3f49T5HgwySRy752QI8ka5/iTWqMd1EwSns5HZ0IAAAEACAOgr6pStZjFKUoBSlKAUpSgFKUoBSlKAr3bzIfrmDcaSB3qfG1P+4nYTwChKCeSjXnx/ChxsgCFJ8SQZBBHtpINwRG3C9epK4x9J3Z84XEjFNCGX1ybWRiNzPRcT/FqncCqsi6l2KXRnI048pGkJA5yJNficwOomLcv82qYzzKxKXUD7NZuB9xfFJ/TpHWq86yUqI5GoxjB9NyyWXLGt9jfdzSRAkDlX42HFAaW5n3/AL8q3Moy9twJ4rJ9kcIq1N5SEIaUrQkAmTMRxBM8LeV6hUI7JF6nlnu2R/Z7HMp8OK7xFvYAhKvMjxem1S2c5wypsJY1B2BcgqSIjw+M++Aa2c1zJsoDbCCsxHswE+RVvfkIqGbwuJIunT1ifhNY8s0ltVG3FjbfiuyTy/OlFUAAJ2hIAv0NretSi3Vn/qq6C5geW5+flVfcDqQVFI1RukAgjqkQR5gnyr8Y7ShbfdmG3PumfCT/ABcz141VBvlJNehZNK6un6k28+dMugOI2MiFCeIm5qIzHBhH2uHUFI+8N7W58OvCtzF4lZa1FY1pN06YPpBSIvxI9eGvlLoBOopClKum9uAChexiP+Ku0RktUNn75K1OUXplwYUYjvWlNpMiNSJ3SQbp8ov6Vudj20uNuBS1p0XWnVZaN9jtBHAjcVovMJYxTZT/AKbm38wiPQ0wrowuIuLJVJHMfuD5gVDXpkpeZbo1QcfmjD2ta0uAAaTpFuVtvT9K/cv7OAsfWJKlD20iJA4kbg19doH+/wASoi4NgenEjrwHnUh2UxxafUwogpUI3kHlHnPzrsHafqRnFpJ+RL9j8eO8m2kwhQMzxgn3/Ov3M2Rh8xQUQEuykjYTEj48epqDyRkpxqkCNBJEcuKT6GPeale1YKsUxpMlKgY6gjntRzuMX6kdKjkaXDRY8I5DazJsTv5D9a4v2kxXePrSPZCpI5qEgfC1Xvtt2jDLXdoI7w8uf9hVGynAa9Lqh4RBJn2lHh8PdPIVqjzqMOSVrSuv4JFlsMMwd1DUoC5ngI91ugrvf0d9nzg8EhCxDzn2j3/qKjw/ypAR/LXOPo17PnGYv6w4Jw+HUDcWXiIlKb8EAhR66BzrttaMUerMmWW9IUpSrSkUpSgFKUoBSlKAUpSgFKUoBWnnGWN4llbDydTbggjjzBB4KBAIPAgGtylAed83ypeBfXhcSCptQsoD/UbnwuJ4BaZuOBkbEEwOPyrQ4NUKG6VDZxHA8L8CJr0Z2r7NtY5ktOWULtuAeJC+Y5jmniPQjiGMwbmEeOExqDomQU3tt3jZO6eaeOxgis84UzTCeomOzmEwzyQlrS2ofhtJ5wePnepbNMuShJbUpWmByjcyYHH/ABXOsZhHGFhbS7Ku2591Y5Hrw5g2PWzdnu2/eDunwdaeftDnE+0OlVO+pog0uD4xeBUlM7hPsubawCfaTYxbcAek1Eu416AoLKFEbDYjyNXvDY1JbACULRsSPEBb7w4J89p9ag83yHRqcE9xzHiLR2vxLZ53jjbbiS8i1y9SFyvPlJP26AtJsTaRwMgC/wA6x5hhGzKmTE3HFKgeczNouPjWDH4WCZTPIxIPHrv8jX65hFIRqSPszEcweKYPWfcKrlDQtWMsxz1PTMw4N1c92pMGPD+m5PhJt0kbVnyHFp1FC0BU7cwR+56Qa18O8hSClRIO6DyV0/fvqNKz3yRJlRGxg3POkVb1Im24pwl8ie7RtlsM2sFFQm5iZF6+e0w1OrUPZMH3i1O17xhscACBUe5mHeMpABChCSDMKCbBQPUcOEmq5wbd+pLHljFJPyNHCOvAnQZTO53jlPL/AB0q35Tlv24UtQSpACrz4tvCOvGtTsrlqFKK9UgJM23un9Zr57T513bw0kQN44xwqeRNuLiiqE6Uk2SuGxzYxixIsknpbif6qrOe9oZxHeC4R7IndV9Px49KhFZgtalFE61m/QVmyvJC4SomEJPjWdh0HNR4D3TVuPAoqpFGTtLbuH6H5g8K5inStw23Uo7JHIfvlzFWXK8vcxuITg8INMXK4kNN7KWrmo8BzgczWDBMO4lxOCwCJUdybBKRutxQFhfrcwJJv3nsT2Tay5jum/G4rxOukQpxf6JGwTwHMkk6Ix1foY5T07Lkk8jylvCsIw7IhtAgcydyoniokkk8zW9SlXFApSlAKUpQClKUApSlAKUpQClKUApSlAKie0nZ5jGtd0+mYulQspCuaTwPTY7EGpalAnRwTP8AIsTlilB1Iewqz7ZHgVwGri05wkb2gm4qtZhkSHx3mFUSoXLZ/wBRPVMe2BzFwOAr0680laSlaQpKhBSoAgg7gg7iucdpfosQo97gF90vfu1E6J/KoSUeVxtEVS8bW8S+ORPaRxrC58+wrxzqFiqSFEcdRMyetWzLfpCUlISDP8Sd/MA38+npWHOWnWld3mOFMmwcgIUeodTKHLc5PUVDryFlQnD4hI492+Aj4qJQf6h5VTKKfGzL4za53RZ3s8ZcQoFpSLH2UEAeUgkX4A843qFTiWFHwEybjwqTcWJggAqO3O9aWHy11gKDjRGoe2TKPS2iSJvJqNccDRBA1AHaDygEHgaripRk07Lm4uOpUYMY9Dio2BPzpg34fQ47ISoyFcPf+4rVZ8RkgnpYe+TUthwdBT4Aki8qBnl4efIzVu0NqIOTybpmftJiUuvJSSNCReOPGsb2KQ4AhJ0oHtq6cvOowYRsGFqJPkaksBkLqxLbKyjfURpT/UqBx5002tiGpp7m9iM/ShAbwiNhcgfEnj86rpZW4qVypRPsjf0HpVpYy5ptI75+Sd22IUZ5F32B6aq2soacdV3eX4dRVN1I8Sx/E8YCB5afWkdn7s5LxIjMvydDYKsRIPBlNlH+I/cHnfpU5knZx/MlacOkNMpMFwCGm43AH/Uc53nmRart2d+ioSHMevXx7lBOmfzrspfkIG8lQrpOGw6G0JQ2lKEJEJSkBKUgbAAWA6VbGDe7KZZEtkRXZXswxgGe6YTc3W4q63Fc1H5AWHAVNUpVxQKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQGPEMJcSULSlaTulQCgfMGxqm5x9F+BektpUwo/7Z8P9CgQB0TFXalccU+Tqk1wcXxH0SY1gk4PGJiZiVs/AagfeKisX2YzpJheHS8n8RDDk+k6q77SuaSfePqebXsnx4JByhJ6jCr+Gm1MPk+PUYGUJTyJwq7Wt7Rr0lSmn1Heeh58wvZbO1KARhgynmkYdr9dfwqxsfRhjniDisShI/iW+RzsrSAfU12ClccE+TiyNcFFyn6LME0dTuvEK/wDqKhH9CIBHRWqrphMKhpAQ0hKEDZKEhIA6AWFZqVJJLgi5N8ilKV04KUpQClKUApSlAKUpQClKUB//2Q=="
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">족발</h5>
+                        <p class="card-text">⭐⭐⭐⭐⭐</p>
+                        <button type="button" class="btn btn-warning">주문하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://img.khan.co.kr/news/2021/05/09/l_2021051001000864600073041.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">치킨</h5>
+                        <p class="card-text">⭐⭐⭐⭐⭐</p>
+                        <button type="button" class="btn btn-warning">주문하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- - https://getbootstrap.com/
+        - Bootstrap 사이트에서 cards 가져와 vscode에 붙여 넣기
+        - *Docs → Card → Grid cards에서 3번째 코드입니다.*
+        - <button> 태그를 생성해 주세요.
+        - <button> 태그안에 `card-button` 클래스를 부여해 주세요.
+        - 카드에 내용은 자유롭게 채워 주세요. -->
+    </div>
+
+    <div class="container2">
+        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+            <div class="col mb-3">
+                <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+                </a>
+                <p class="text-body-secondary">©Teamsparta 2024</p>
+            </div>
+            <div class="col mb-3">
+            </div>
+            <div class="col mb-3">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
